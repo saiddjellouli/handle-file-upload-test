@@ -1,0 +1,14 @@
+{
+  "name": "csv-file-upload-backend",
+  "version": "1.0.0",
+  "description": "Node.js API for handling CSV file upload, processing, and compression.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "express": "^4.18.2",
+    "zip-a-folder": "^1.0.0"
+  }
+}

@@ -1,5 +1,5 @@
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/uploadRoute");
 
 const app = express();
 const port = 3001;

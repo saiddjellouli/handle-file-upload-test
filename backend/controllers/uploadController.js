@@ -1,19 +1,8 @@
-const express = require("express");
 const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
-const { processCSV } = require("./fileHandler");
+const { processCSV } = require("../services/csvService");
 
-// Create router
-const router = express.Router();
-
-// Configure multer for file upload handling : uploaded file will be temporarly store in 'uploads' folder
-const upload = multer({
-  dest: path.join(__dirname, "uploads/"),
-});
-
-// Define the upload post route
-router.post("/upload", upload.single("csvfile"), async (req, res) => {
+// Define the upload controller
+const uploadController = async (req, res) => {
   const filePath = req.file.path;
   try {
     const zipPath = await processCSV(filePath);
@@ -35,6 +24,6 @@ router.post("/upload", upload.single("csvfile"), async (req, res) => {
     console.log(error);
     res.status(500).send("Error while processing CSV file");
   }
-});
+};
 
-module.exports = router;
+module.exports = uploadController;

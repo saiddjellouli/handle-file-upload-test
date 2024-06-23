@@ -1,10 +1,10 @@
 const path = require("path");
+const os = require("os");
 
-// Define the base upload and zip directories
 const UPLOADS_DIR = path.join(__dirname, "uploads");
-const ZIP_DIR = path.join(__dirname, "zip");
+const TEMP_DIR = path.join(os.tmpdir(), "zip-temp");
 
 module.exports = {
   UPLOADS_DIR,
-  ZIP_DIR,
+  TEMP_DIR,
 };

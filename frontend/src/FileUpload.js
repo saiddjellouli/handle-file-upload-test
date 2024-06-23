@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import config from "./config";
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -28,19 +29,23 @@ const FileUpload = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        //Enables to create downloadable link for the returned zip file
-        responseType: "blob",
-        onUploadProgress: (progressEvent) => {
-          const progress = Math.round(
-            (progressEvent.loaded / progressEvent.total) * 100
-          );
-          setUploadProgress(progress);
-        },
-      });
+      const response = await axios.post(
+        `${config.SERVER_URL}/api/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          //Enables to create downloadable link for the returned zip file
+          responseType: "blob",
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            );
+            setUploadProgress(progress);
+          },
+        }
+      );
 
       //Creates an url for downloading returned zip file
       const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
